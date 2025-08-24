@@ -983,55 +983,65 @@ bool CStatusEffectContainer::HasStatusEffectByFlag(uint32 flag)
  *                                                                       *
  ************************************************************************/
 
-bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8 maxSongs)
+auto CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8 maxSongs) -> bool
 {
     // if all match tier/id/effect then overwrite
-
     // if tier/effect match then overwrite //but id doesn't, NO EFFECT
-    // if targ has <2 of your songs on, then just apply
+    // if targ has < 2 of your songs on, then just apply
     // if targ has 2 of your songs, remove oldest one and apply this one.
 
-    uint8          numOfEffects = 0;
-    CStatusEffect* oldestSong   = nullptr;
+    uint8          numOfEffects    = 0;
+    CStatusEffect* oldestSong      = nullptr;
+    CStatusEffect* effectToReplace = nullptr;
+
     for (CStatusEffect* ExistingStatusEffect : m_StatusEffectSet)
     {
-        if (ExistingStatusEffect->GetStatusID() >= EFFECT_REQUIEM && ExistingStatusEffect->GetStatusID() <= EFFECT_NOCTURNE) // is an active brd effect
+        if (ExistingStatusEffect->GetStatusID() >= EFFECT_REQUIEM && ExistingStatusEffect->GetStatusID() <= EFFECT_NOCTURNE) // Is an active BRD effect
         {
-            if (ExistingStatusEffect->GetTier() == PStatusEffect->GetTier() && ExistingStatusEffect->GetStatusID() == PStatusEffect->GetStatusID())
-            { // same tier/type, overwrite
-                // OVERWRITE
-                PStatusEffect->SetEffectSlot(ExistingStatusEffect->GetEffectSlot()); // use same slot as the one it replaces
-                DelStatusEffectByTier(PStatusEffect->GetStatusID(), PStatusEffect->GetTier());
+            if (ExistingStatusEffect->GetTier() == PStatusEffect->GetTier() &&
+                ExistingStatusEffect->GetStatusID() == PStatusEffect->GetStatusID())
+            {
+                effectToReplace = ExistingStatusEffect;
+                break; // Found exact match(Status ID AND TIER), no need to continue loop.
             }
-            if (ExistingStatusEffect->GetSubID() == PStatusEffect->GetSubID())
-            { // YOUR BRD effect
+
+            if (ExistingStatusEffect->GetSourceTypeParam() == PStatusEffect->GetSourceTypeParam()) // GetSourceTypeParam() stores charID of the initial caster
+            { // This is YOUR BRD effect, not a party member's.
                 numOfEffects++;
-                if (!oldestSong)
-                {
-                    oldestSong = ExistingStatusEffect;
-                }
-                else if (ExistingStatusEffect->GetStartTime() + ExistingStatusEffect->GetDuration() <
-                         oldestSong->GetStartTime() + oldestSong->GetDuration())
+                if (!oldestSong || (ExistingStatusEffect->GetStartTime() + ExistingStatusEffect->GetDuration() <
+                                       oldestSong->GetStartTime() + oldestSong->GetDuration()))
                 {
                     oldestSong = ExistingStatusEffect;
                 }
             }
         }
+    }
+
+    // Handle overwrite case first if our song matches ID/Tier of song effect already on target.
+    if (effectToReplace)
+    {
+        PStatusEffect->SetEffectSlot(effectToReplace->GetEffectSlot());
+        DelStatusEffectByTier(effectToReplace->GetStatusID(), effectToReplace->GetTier());
+        AddStatusEffect(PStatusEffect);
+        return true;
     }
 
     if (numOfEffects < maxSongs)
     {
         if (PStatusEffect->GetEffectSlot() == 0)
         {
-            // use lowest available slot, unless it's replacing an existing song
+            // Use lowest available slot.
             PStatusEffect->SetEffectSlot(GetLowestFreeSlot());
         }
         AddStatusEffect(PStatusEffect);
         return true;
     }
+    // Overwrite oldest song if slots are full.
     else if (oldestSong)
     {
-        // overwrite oldest
+        // Note: The slots are preserved/passed on to the next song effect until the effect occupying the slot is removed without being replaced(Wear off, K.O, Dispel, etc).
+        //       This mechanic allows a BRD to keep the extra slots(If they have a song cap larger than 2 slots) as long as they refresh songs even after the
+        //       MAXIMUM_SONGS_BONUS modifer returns to 0 (Clarion Call wears off, BRD removes equipment, etc).
         PStatusEffect->SetEffectSlot(oldestSong->GetEffectSlot());
         DelStatusEffectByTier(oldestSong->GetStatusID(), oldestSong->GetTier());
         AddStatusEffect(PStatusEffect);

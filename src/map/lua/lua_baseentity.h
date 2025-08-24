@@ -711,8 +711,7 @@ public:
     bool   hasBustEffect(uint16 id); // Checks to see if a character has a specified busted corsair roll
     uint8  numBustEffects();         // Gets the number of bust effects on the player
     uint16 healingWaltz();
-    bool   addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick,
-                       uint16 duration, uint16 SubType, uint16 subPower, uint16 tier);
+    auto   addBardSong(sol::variadic_args va) -> bool;
 
     void charm(CLuaBaseEntity const* target, sol::object const& p0);
     void uncharm();

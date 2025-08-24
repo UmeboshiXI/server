@@ -224,7 +224,7 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
 
     -- Virelai applies a charm. Quit early.
     elseif spellEffect == xi.effect.CHARM_I then
-        target:addStatusEffect(xi.effect.CHARM_I, 0, 0, duration)
+        target:addStatusEffect(xi.effect.CHARM_I, 0, 0, duration, 0, 0, 0, xi.effectSourceType.BARD_SONG, caster:getID(), caster:getID())
         caster:charm(target)
         if caster:isPC() then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
@@ -238,7 +238,8 @@ xi.spells.enfeebling.useEnfeeblingSong = function(caster, target, spell)
     ------------------------------
     -- STEP 5: Attempt to apply the status effect. Check for magic burst.
     ------------------------------
-    if target:addStatusEffect(spellEffect, power, tick, duration, 0, subEffect) then
+    -- TODO: Do we need to define tier for enfeebling songs?
+    if target:addStatusEffect(spellEffect, power, tick, duration, 0, subEffect, 0, xi.effectSourceType.BARD_SONG, caster:getID(), caster:getID()) then
         local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
         if skillchainCount > 0 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_ENFEEB)

@@ -49,7 +49,7 @@ public:
     uint64 m_Flags{ 0 };        // Bits of overflow of bytes m_statusicons (two battles for each effect)
     uint8  m_StatusIcons[32]{}; // Icons status effects
 
-    bool ApplyBardEffect(CStatusEffect* PStatusEffect, uint8 maxSongs);
+    auto ApplyBardEffect(CStatusEffect* PStatusEffect, uint8 maxSongs) -> bool;
     bool CanGainStatusEffect(CStatusEffect* PStatusEffect); // returns true if the status effect will take effect
     bool AddStatusEffect(CStatusEffect* StatusEffect, EffectNotice = EffectNotice::ShowMessage);
     bool DelStatusEffect(EFFECT StatusID);

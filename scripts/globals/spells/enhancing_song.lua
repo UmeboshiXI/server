@@ -304,7 +304,7 @@ xi.spells.enhancing.useEnhancingSong = function(caster, target, spell)
     end
 
     -- Change message when higher effect already in place.
-    if not target:addBardSong(caster, songEffect, power, paramFour, duration, caster:getID(), subEffect, tier) then
+    if not target:addBardSong(caster, songEffect, power, paramFour, duration, 0, subEffect, tier, xi.effectSourceType.BARD_SONG, caster:getID(), caster:getID()) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

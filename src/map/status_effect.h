@@ -778,6 +778,7 @@ enum EffectSourceType : uint8_t
     SOURCE_MOB            = 3,
     SOURCE_FOOD           = 4,
     SOURCE_CORSAIR_ROLL   = 5,
+    SOURCE_BARD_SONG      = 6,
 };
 
 class CStatusEffect

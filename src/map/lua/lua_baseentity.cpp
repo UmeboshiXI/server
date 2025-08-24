@@ -14392,11 +14392,11 @@ uint16 CLuaBaseEntity::healingWaltz()
 /************************************************************************
  *  Function: addBardSong()
  *  Purpose : Adds a song effect to Player(s') Status Effect Container(s); returns true if sucess
- *  Example : target:addBardSong(caster, xi.effect.BALLAD, power, 0, duration, caster:getID(), 0, 1)
- *  Notes   :
+ *  Example : target:addBardSong(caster, xi.effect.BALLAD, power, 0, duration, subType, subPower, tier, sourceType, sourceTypeParam, originID)
+ *  Notes   : All arguments are required. If an argument is not used, it can set as 0.
  ************************************************************************/
 
-bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick, uint16 duration, uint16 subType, uint16 subPower, uint16 tier)
+auto CLuaBaseEntity::addBardSong(sol::variadic_args va) -> bool
 {
     auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattle)
@@ -14404,6 +14404,26 @@ bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint1
         ShowError("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
         return false;
     }
+
+    // Make sure all arguments are filled in.
+    if (va.size() < 11)
+    {
+        ShowError("CLuaBaseEntity::addBardSong: Requires 11 arguments.");
+        return false;
+    }
+
+    // Extract parameters - PEntity is mandatory first parameter
+    CLuaBaseEntity* PEntity         = va[0].as<CLuaBaseEntity*>();
+    auto            effectID        = va[1].as<uint16>();
+    auto            power           = va[2].as<uint16>();
+    auto            tick            = va[3].as<uint16>();
+    auto            duration        = va[4].as<uint16>();
+    auto            subType         = va[5].is<uint16>();
+    auto            subPower        = va[6].is<uint16>();
+    auto            tier            = va[7].is<uint16>();
+    auto            sourceType      = va[8].is<uint16>();
+    auto            sourceTypeParam = va[9].is<uint32>();
+    auto            originID        = va[10].is<uint32>();
 
     CStatusEffect* PEffect = new CStatusEffect(static_cast<EFFECT>(effectID),  // Effect ID
                                                effectID,                       // Effect Icon (Associated with ID)
@@ -14414,6 +14434,9 @@ bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint1
                                                subPower,                       // SubPower
                                                tier                            // Tier
     );
+
+    PEffect->SetSource(sourceType, sourceTypeParam); // sourceTypeParam() stores caster's ID
+    PEffect->SetOriginID(originID);                  // originID store ID of initial caster.
 
     uint8 maxSongs = 2;
 

@@ -3127,8 +3127,11 @@ end
 ---@param SubType integer
 ---@param subPower integer
 ---@param tier integer
+---@param sourceType integer
+---@param sourceTypeParam integer
+---@param originID integer
 ---@return boolean
-function CBaseEntity:addBardSong(PEntity, effectID, power, tick, duration, SubType, subPower, tier)
+function CBaseEntity:addBardSong(PEntity, effectID, power, tick, duration, SubType, subPower, tier, sourceType, sourceTypeParam, originID)
 end
 
 ---@param target CBaseEntity
