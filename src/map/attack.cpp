@@ -652,15 +652,33 @@ void CAttack::ProcessDamage()
     SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
     if (m_attackRound->IsH2H())
     {
-        m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
-        m_baseDamage       = m_attacker->GetMainWeaponDmg();
+        m_naturalH2hDamage  = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
+        m_baseDamage        = m_attacker->GetMainWeaponDmg();
 
         if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
         {
+            // TODO: Capture more data on mob kick attacks and their damage formula as it may be different from players.
             int32 kickDamage = m_naturalH2hDamage + m_attacker->getMod(Mod::KICK_DMG); // KICK_DMG includes weapon dmg if footwork is active
             m_damage         = (uint32)(((kickDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
         }
-        else
+        else if (m_attacker->objtype == TYPE_MOB)
+        {
+            // Mobs use a different base damage formula than players.
+            // H2H attacks from mobs have a base damage penalty applied based on what zone they are in.
+            float mobH2HPenalty = 1.0f;
+            REGION_TYPE regionID = m_attacker->loc.zone->GetRegionID();
+            if (m_attacker->objtype == TYPE_MOB && regionID <= REGION_TYPE::LIMBUS) // Pre TOAU zones
+            {
+                mobH2HPenalty = 0.425f; // Vanilla - COP
+            }
+            else
+            {
+                mobH2HPenalty = 0.650f; // TOAU onward
+            }
+
+            m_damage = (uint32)(((((m_baseDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot))) * mobH2HPenalty) * m_damageRatio));
+        }
+        else // Players use this calculation.
         {
             m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_bonusBasePhysicalDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
         }

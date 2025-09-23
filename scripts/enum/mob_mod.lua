@@ -94,4 +94,10 @@ xi.mobMod =
     CLAIM_TYPE             = 83, -- Changes the claim behavior of the mob. See xi.claimType enum.
     NO_SPELL_COST          = 84, -- Mob does not use MP when casting spells
     ASTRAL_PET_OFFSET      = 85, -- If non-zero, defines the offset from main mob's ID for astral flow (if zero, will assume offset of 2)
+    BASE_DAMAGE_OVERRIDE   = 86, -- Overrides the mob's base damage.
+    BASE_DAMAGE_MULTIPLIER = 87, -- Multiplies the mob's base damage. This is applied BEFORE MOBMOD_BASE_DAMAGE_OFFSET. BASE 10000 (15000 = x1.5)
+    DAMAGE_MULTIPLIER_MODE = 88, -- Default: 0. Setting to 1 includes the damage offset in the MOBMOD_BASE_DAMAGE_MULTIPLIER. Used for special mob cases such as Korrigan and Tauri.
+    DAMAGE_OFFSET          = 89, -- Overrides the mob's base damage offset.
+    RANGED_DAMAGE_OFFSET   = 90, -- Overrides the mob's ranged base damage offset.
+    FAMILY_DAMAGE_OFFSET   = 91, -- Adjusts the existing offset after region/mod corrections (Some mob families have slight differences in offset).
 }
