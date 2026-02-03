@@ -359,6 +359,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         hitsdone = hitsdone + 1
     end
 
+    finaldmg = math.floor(finaldmg * xi.combat.damage.physicalElementSDT(target, params.damageType))
     finaldmg = math.floor(finaldmg * xi.combat.damage.calculateDamageAdjustment(target, true, false, false, false))
 
     if finaldmg <= 0 then
