@@ -3919,8 +3919,9 @@ function CBaseEntity:isAggroable()
 end
 
 ---@param delay integer
+---@param slot xi.slot.MAIN | xi.slot.SUB | xi.slot.RANGED
 ---@return nil
-function CBaseEntity:setDelay(delay)
+function CBaseEntity:setDelay(delay, slot)
 end
 
 ---@param damage integer

@@ -670,6 +670,7 @@ templates:
     skill_list_id: 133
     attributes:
       combat:
+        ranged_delay: 365
         skill: dagger
       jobs: [rng, rng]
       resists:

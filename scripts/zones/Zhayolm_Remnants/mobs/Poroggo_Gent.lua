@@ -43,7 +43,7 @@ entity.onMobSpawn = function(mob)
         mob:setSpellList(0)
         mob:setMP(0)
         mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-        mob:setDelay(250)
+        mob:setDelay(250, xi.slot.MAIN)
     end
 end
 

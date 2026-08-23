@@ -8,7 +8,7 @@ local ID = zones[xi.zone.ZHAYOLM_REMNANTS]
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setDelay(700)
+    mob:setDelay(700, xi.slot.MAIN)
     mob:setMod(xi.mod.ATT, 75)
     mob:setMod(xi.mod.MAIN_DMG_RATING, -18)
 end

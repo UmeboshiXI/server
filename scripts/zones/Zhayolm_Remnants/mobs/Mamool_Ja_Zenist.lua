@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     if instance then
         local stage    = instance:getStage()
         if stage == 1 then
-            mob:setDelay(480)
+            mob:setDelay(480, xi.slot.MAIN)
             mob:setMod(xi.mod.ATT, 60)
             mob:setMod(xi.mod.MAIN_DMG_RATING, -32)
             mob:setMod(xi.mod.INT, -25)

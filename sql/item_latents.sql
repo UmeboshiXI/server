@@ -2262,20 +2262,20 @@ INSERT INTO `item_latents` VALUES (17589,287,13,47,0);   -- DMG+13 when broken (
 -- Primate Staff
 INSERT INTO `item_latents` VALUES (17590,25,10,49,4468);     -- Pamamas
 INSERT INTO `item_latents` VALUES (17590,25,10,49,4596);     -- Wild Pamamas
-INSERT INTO `item_latents` VALUES (17590,171,-1383,49,4468); -- DELAY: -1383, Pamamas
-INSERT INTO `item_latents` VALUES (17590,171,-1383,49,4596); -- DELAY: -1383, Wild Pamamas
+INSERT INTO `item_latents` VALUES (17590,171,-83,49,4468); -- DELAY: -83, Pamamas
+INSERT INTO `item_latents` VALUES (17590,171,-83,49,4596); -- DELAY: -83, Wild Pamamas
 
 -- Primate Staff +1
 INSERT INTO `item_latents` VALUES (17591,25,12,49,4468);     -- Pamamas
 INSERT INTO `item_latents` VALUES (17591,25,12,49,4596);     -- Wild Pamamas
-INSERT INTO `item_latents` VALUES (17591,171,-1333,49,4468); -- DELAY: -1333, Pamamas
-INSERT INTO `item_latents` VALUES (17591,171,-1333,49,4596); -- DELAY: -1333, Wild Pamamas
+INSERT INTO `item_latents` VALUES (17591,171,-80,49,4468); -- DELAY: -80, Pamamas
+INSERT INTO `item_latents` VALUES (17591,171,-80,49,4596); -- DELAY: -80, Wild Pamamas
 
 -- Kinkobo
 INSERT INTO `item_latents` VALUES (17592,25,10,49,4468);     -- Pamamas
 INSERT INTO `item_latents` VALUES (17592,25,10,49,4596);     -- Wild Pamamas
-INSERT INTO `item_latents` VALUES (17592,171,-1383,49,4468); -- DELAY: -1383, Pamamas
-INSERT INTO `item_latents` VALUES (17592,171,-1383,49,4596); -- DELAY: -1383, Wild Pamamas
+INSERT INTO `item_latents` VALUES (17592,171,-83,49,4468); -- DELAY: -83, Pamamas
+INSERT INTO `item_latents` VALUES (17592,171,-83,49,4596); -- DELAY: -83, Wild Pamamas
 
 -- Diabolos's Pole
 INSERT INTO `item_latents` VALUES (17599,315,25,52,8);   -- +25% drain/aspir potency in Dark weather
@@ -2892,7 +2892,7 @@ INSERT INTO `item_latents` VALUES (18484,287,5,58,0);    -- Wamoura Axe DMG+5 in
 INSERT INTO `item_latents` VALUES (18484,288,1,58,0);    -- Wamoura Axe Double Attack +1% in Assault
 
 -- Wardancer
-INSERT INTO `item_latents` VALUES (18486,171,-500,25,0); -- DELAY: -500 song/roll active (-30 * 1000 / 60)
+INSERT INTO `item_latents` VALUES (18486,171,-30,25,0); -- DELAY: -30 song/roll active
 
 -- Perdu Voulge
 INSERT INTO `item_latents` VALUES (18491,23,10,6,1000);  -- Attack+10 while TP <100%

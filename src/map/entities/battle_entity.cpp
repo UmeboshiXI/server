@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -474,7 +474,7 @@ auto CBattleEntity::GetWeaponDelay(bool tp) -> uint32
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
-        uint16 weaponDelay = weapon->getDelay() + getMod(xi::Mod::DELAY);
+        uint16 weaponDelay = static_cast<uint16>(std::max<int32>(1,weapon->getDelay() + int16(getMod(xi::Mod::DELAY) * 1000.0f / 60.0f)));
 
         // Flat bonuses/Penalties (Bonuses would be negative in value)
         int16 martialArts = 0;

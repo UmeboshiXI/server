@@ -532,7 +532,7 @@ entity.onMobSpawn = function(mob)
 
     mob:setLocalVar('initiatorJob', initiatorJob) -- Store as local variable so battlefield only needs to be fetched on spawn.
     mob:changeJob(initiatorJob)
-    mob:setDelay(jobInfo.delay)
+    mob:setDelay(jobInfo.delay, xi.slot.MAIN)
     mob:setModelId(jobInfo.modelId)
     mob:setMobAbilityEnabled(false)
     mob:setMagicCastingEnabled(false)

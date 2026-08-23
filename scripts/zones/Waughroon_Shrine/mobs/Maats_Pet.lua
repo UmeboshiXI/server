@@ -83,7 +83,7 @@ entity.onMobSpawn = function(mob)
 
     mob:setModelId(petInfo.modelId)
     mob:changeJob(petInfo.job)
-    mob:setDelay(240)
+    mob:setDelay(240, xi.slot.MAIN)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
     mob:setLocalVar('petIndex', petChosen)
 end

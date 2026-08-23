@@ -49,7 +49,7 @@ entity.onMobFight = function(mob, target)
         end)
 
         mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, selectedForm.bonus)
-        mob:setDelay(selectedForm.delay)
+        mob:setDelay(selectedForm.delay, xi.slot.MAIN)
         mob:setAnimationSub(selectedForm.animSub)
         mob:setMod(xi.mod.TRIPLE_ATTACK, selectedForm.tripleAtk)
     end
@@ -78,7 +78,7 @@ entity.onMobDisengage = function(mob)
     -- Reset to normal form with normal mode stats
     mob:setAnimationSub(13)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MODIFIER, 0)
-    mob:setDelay(240)
+    mob:setDelay(240, xi.slot.MAIN)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
 end
 

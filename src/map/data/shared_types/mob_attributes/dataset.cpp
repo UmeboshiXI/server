@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2026 LandSandBoat Dev Teams
@@ -245,6 +245,7 @@ auto convertAttributes(const shared::MobAttributes& source, const std::string_vi
     {
         attributes.CombatSkill      = resolveOptionalEnum(source.combat->skill);
         attributes.Delay            = source.combat->delay;
+        attributes.RangedDelay      = source.combat->ranged_delay;
         attributes.DamageMultiplier = source.combat->dmg_mult;
     }
 

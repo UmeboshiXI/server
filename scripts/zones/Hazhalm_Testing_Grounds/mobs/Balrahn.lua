@@ -32,7 +32,7 @@ end
 entity.onMobWeaponSkill = function(mob, target, skill, action)
     if skill:getID() == xi.mobSkill.IMMORTAL_SHIELD then
         mob:setMagicCastingEnabled(true)
-        mob:setDelay(600)
+        mob:setDelay(600, xi.slot.MAIN)
     end
 end
 

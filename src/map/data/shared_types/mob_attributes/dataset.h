@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2026 LandSandBoat Dev Teams
@@ -88,6 +88,7 @@ struct MobAttributesData
     std::optional<xi::Immunity>            Immune{};
     std::optional<xi::SkillType>           CombatSkill{};
     std::optional<uint16>                  Delay{};
+    std::optional<uint16>                  RangedDelay{};
     std::optional<uint16>                  DamageMultiplier{};
     std::optional<xi::Job>                 MainJob{};
     std::optional<xi::Job>                 SubJob{};
@@ -140,6 +141,7 @@ struct MobAttributesOverrides
     std::optional<xi::Immunity>            Immune;
     std::optional<xi::SkillType>           CombatSkill;
     std::optional<uint16>                  Delay;
+    std::optional<uint16>                  RangedDelay;
     std::optional<uint16>                  DamageMultiplier;
     std::optional<xi::Job>                 MainJob;
     std::optional<xi::Job>                 SubJob;

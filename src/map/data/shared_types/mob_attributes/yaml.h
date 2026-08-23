@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2026 LandSandBoat Dev Teams
@@ -133,6 +133,7 @@ struct Combat
 {
     SkillType             skill;
     std::optional<uint16> delay;
+    std::optional<uint16> ranged_delay;
     std::optional<uint16> dmg_mult;
 };
 
@@ -209,6 +210,7 @@ struct glz::json_schema<xi::data::shared::Combat>
 {
     glz::schema skill{ .description = "Weapon skill type. Defaults to none." };
     glz::schema delay{ .description = "Attack delay. Defaults to 240." };
+    glz::schema ranged_delay{ .description = "Raanged attack delay. Defaults to 360." };
     glz::schema dmg_mult{ .description = "Base damage multiplier as a percentage. Defaults to 100." };
 };
 

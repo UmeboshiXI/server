@@ -91,14 +91,14 @@ entity.onMobSpawn = function(mob)
 
     -- only appear on floor 1, and damage and delay are altered
     mob:addListener('AFTER_SPAWN', 'WAMOURACAMPA_AFTER_SPAWN', function(mobArg)
-        mobArg:setDelay(330)
+        mobArg:setDelay(330, xi.slot.MAIN)
         mobArg:setMod(xi.mod.ATT, 101)
         mobArg:setMod(xi.mod.MAIN_DMG_RATING, -45)
     end)
 
     -- only appear on floor 1, and damage and delay are altered
     mob:addListener('AFTER_SPAWN', 'WAMOURACAMPA_AFTER_SPAWN', function(mobArg)
-        mobArg:setDelay(330)
+        mobArg:setDelay(330, xi.slot.MAIN)
         mobArg:setMod(xi.mod.ATT, 101)
         mobArg:setMod(xi.mod.MAIN_DMG_RATING, -45)
         mobArg:setMod(xi.mod.INT, -35)

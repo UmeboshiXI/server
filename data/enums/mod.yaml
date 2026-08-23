@@ -829,7 +829,7 @@ values:
   cure_potency_ii:     260 # % cure potency II | bonus from gear is capped at 30
   cure_potency_rcvd:   375 # % potency of received cure | healer's roll, some items have this
   cure_potency_bonus: 1051 # TODO: Increases amount healed by Cure spells (fixed amount)
-  delayp:              380 # delay addition percent (does not affect tp gain)
+  delayp:              380 # delay addition percent
   ranged_delayp:       381 # ranged delay addition percent (does not affect tp gain)
   shield_bash:         385
   kick_dmg:            386 # increases kick attack damage

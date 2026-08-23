@@ -18502,18 +18502,25 @@ bool CLuaBaseEntity::isAggroable()
  *  Example : mob:setDelay(240) -- 240 raw game delay units
  ************************************************************************/
 
-void CLuaBaseEntity::setDelay(uint16 delay)
+void CLuaBaseEntity::setDelay(uint16 delay, uint8 slot)
 {
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & (TYPE_MOB | TYPE_PET)))
     {
         ShowError("function call on invalid entity! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
         return;
     }
 
+    if (slot < SLOT_MAIN || slot > SLOT_RANGED)
+    {
+        ShowError("attempted to setDelay for an invalid slot! (name: %s type: %d)", m_PBaseEntity->name, m_PBaseEntity->objtype);
+        return;
+    }
+
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
-    if (auto* PItemWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]))
+    if (auto* PItemWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[slot]))
     {
         PItemWeapon->setDelay(delay);
+        PItemWeapon->setBaseDelay(delay);
     }
 }
 

@@ -21,7 +21,7 @@ local tentacleTable =
 }
 
 local function setupPhase(mob, currentTentacles)
-    mob:setDelay(tentacleTable[currentTentacles][2])
+    mob:setDelay(tentacleTable[currentTentacles][2], xi.slot.MAIN)
     mob:setMod(xi.mod.REGAIN, tentacleTable[currentTentacles][3])
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, tentacleTable[currentTentacles][4])
     mob:setMobSkillAttack(tentacleTable[currentTentacles][5])

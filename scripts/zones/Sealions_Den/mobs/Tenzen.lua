@@ -64,7 +64,7 @@ local taruOffsets =
 local function setupForm(mob, newForm)
     mob:setAnimationSub(newForm)
     mob:setMobSkillAttack(formTable[newForm].skill)
-    mob:setDelay(formTable[newForm].delay)
+    mob:setDelay(formTable[newForm].delay, xi.slot.MAIN)
     mob:setBehavior(formTable[newForm].standback)
 
     -- Pause for animation change before enabling auto attacks

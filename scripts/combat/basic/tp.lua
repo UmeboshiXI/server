@@ -67,13 +67,20 @@ xi.combat.tp.calculateTPReturn = function(gainee, delay)
     return math.floor(tpReturn)
 end
 
-xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
+xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay, isRanged)
     local modifiedDelay = delay
     local canZanshin    = false
 
+    if isRanged then
+        modifiedDelay = math.max(delay + actor:getMod(xi.mod.RANGED_DELAY), 1)
+    end
+
     -- DW/H2H delay is halved for the purposes of a single hit's TP return when applicable, see https://www.bg-wiki.com/ffxi/Tactical_Points
-    if actor:isDualWielding() then -- NOTE: this 'isDualWielding' may trip on non-PCs even if they are 'using h2h'. If this is rectified in core in the future this should fall through correctly.
-        modifiedDelay = (delay * (100 - actor:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
+    if
+        actor:isDualWielding() and -- NOTE: this 'isDualWielding' may trip on non-PCs even if they are 'using h2h'. If this is rectified in core in the future this should fall through correctly.
+        not isRanged
+    then
+        modifiedDelay = (modifiedDelay * (100 - actor:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
     elseif actor:isUsingH2H() then
         if actor:getObjType() == xi.objType.PC then -- handle h2h with > 1 swing only on PC
             if
@@ -96,7 +103,9 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
         canZanshin = true -- https://www.bg-wiki.com/ffxi/Zanshin
     end
 
-    modifiedDelay = modifiedDelay * math.max((100 + actor:getMod(xi.mod.DELAYP)) / 100, 0.85) -- minimum cap of -15% https://www.bg-wiki.com/ffxi/Attack_Speed. Undocumented if 15% + Claymore Grip goes above 15%.
+    -- minimum cap of -15% https://www.bg-wiki.com/ffxi/Attack_Speed. Undocumented if 15% + Sword Strap goes above 15%.
+    -- TODO: The above is referencing Blitzer's Roll. Maybe make a new mod for it since it has a cap.
+    modifiedDelay = modifiedDelay * math.max((100 + actor:getMod(xi.mod.DELAYP)) / 100, 0.85)
 
     return ({ canZanshin = canZanshin , modifiedDelay = math.floor(modifiedDelay) })
 end
@@ -126,9 +135,10 @@ xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, isZanshin)
     end
 
     isZanshin = isZanshin or false -- optional input, defaults to false.
+    local isRanged = false
 
     local delay        = actor:getBaseDelay()
-    local attackOutput = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
+    local attackOutput = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay, isRanged)
     local tpReturn     = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
 
     if isZanshin and attackOutput.canZanshin then
@@ -150,9 +160,17 @@ xi.combat.tp.getSingleWeaponTPReturn = function(actor, slot)
         return 0
     end
 
+    local isRanged = false
+    if
+        slot == xi.slot.RANGED or
+        slot == xi.slot.AMMO
+    then
+        isRanged = true
+    end
+
     -- TODO: implement Zanshin check optionally?
     local delay           = actor:getBaseWeaponDelay(slot)
-    local attackOutput    = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
+    local attackOutput    = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay, isRanged)
     local tpReturn        = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
     local storeTPModifier = 1 + actor:getMod(xi.mod.STORETP) / 100
 
@@ -166,13 +184,18 @@ xi.combat.tp.getSingleRangedHitTPReturn = function(actor)
     end
 
     local delay = actor:getBaseRangedDelay() -- there do not appear to be any delay modifiers for ranged attacks, snapshot does not seem to effect this
+
     if delay <= 0 then
         return 0
     end
 
     local storeTPModifier = 1 + actor:getMod(xi.mod.STORETP) / 100
 
-    return math.floor(xi.combat.tp.calculateTPReturn(actor, delay) * storeTPModifier)
+    local tpReturn = math.floor(xi.combat.tp.calculateTPReturn(actor, delay) * storeTPModifier)
+
+    print('tpReturn', tpReturn)
+
+    return tpReturn
 end
 
 -- This function calculates how much TP a target(The defender) will gain upon being hit by a physical attack.
@@ -181,8 +204,9 @@ end
 --- @params target CBaseEntity
 --- @params totalDamage integer
 --- @params delay integer
+--- @params isRanged boolean
 --- @return integer
-xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDamage, delay)
+xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDamage, delay, isRanged)
     if not actor or not target then
         return 0
     end
@@ -195,8 +219,10 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
         return 0
     end
 
+    isRanged = isRanged or false
+
     -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
-    local attackOutput       = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
+    local attackOutput       = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay, isRanged)
     local baseTPGain         = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
     local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
     local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
@@ -208,6 +234,8 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
     local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.25)          -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
     local storeTPModifier    = 1 + target:getMod(xi.mod.STORETP) / 100
 
+    print('Delay', delay)
+    print('BASE TP GAIN', baseTPGain)
     -- TODO: unknown where/how many floor steps there are. Napkin math seems to be a single floor step, but given x/256 it's hard to tell
     -- TODO: unknown if player pets (automaton/wyvern/avatars) are affected by dAGI
 
@@ -221,7 +249,9 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDama
         return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
     else
         -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
-        return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
+        local finalTPReturn = math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
+        print('Final TP Return:', finalTPReturn)
+        return finalTPReturn
     end
 end
 

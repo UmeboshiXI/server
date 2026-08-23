@@ -11,6 +11,7 @@ effectObject.onEffectGain = function(target, effect)
     effect:addMod(xi.mod.ATTP, -15)
     effect:addMod(xi.mod.HASTE_ABILITY, -1500)
     effect:addMod(xi.mod.RATTP, 15)
+    -- Ranged delay reduction handled in battleutils.cpp
 end
 
 effectObject.onEffectTick = function(target, effect)

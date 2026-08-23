@@ -13,7 +13,7 @@ local function night(mob)
         mob:setMobMod(xi.mobMod.ROAM_COOL, 10)
         mob:delMod(xi.mod.EVA, 15)
         mob:delMod(xi.mod.ACC, 15)
-        mob:setMod(xi.mod.DELAY, -400)
+        mob:setMod(xi.mod.DELAY, -24)
         mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar('[ladybug]nightSkillList'))
         mob:setLocalVar('Phase', 1)
     end

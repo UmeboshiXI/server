@@ -90,9 +90,9 @@ local function checkEnrage(mob)
     end
 
     if hpp <= 10 then
-        mob:setDelay(160)
+        mob:setDelay(160, xi.slot.MAIN)
     else
-        mob:setDelay(210)
+        mob:setDelay(210, xi.slot.MAIN)
     end
 end
 

@@ -139,26 +139,26 @@ entity.onMobFight = function(mob, target)
         {
             [forms.UNARMED] = function()
                 mob:setMagicCastingEnabled(false)
-                mob:setDelay(240)
+                mob:setDelay(240, xi.slot.MAIN)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
             end,
 
             [forms.SWORD] = function()
                 mob:setMagicCastingEnabled(false)
-                mob:setDelay(120)
+                mob:setDelay(120, xi.slot.MAIN)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
             end,
 
             [forms.POLEARM] = function()
                 mob:setMagicCastingEnabled(false)
-                mob:setDelay(300)
+                mob:setDelay(300, xi.slot.MAIN)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
             end,
 
             [forms.STAFF] = function()
                 mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
                 mob:setMagicCastingEnabled(true)
-                mob:setDelay(240)
+                mob:setDelay(240, xi.slot.MAIN)
                 mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 100)
             end,
         }

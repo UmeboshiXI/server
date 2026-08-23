@@ -61,6 +61,7 @@ namespace
 {
 
 constexpr uint16 kDefaultMobDelay            = 240;
+constexpr uint16 kDefaultMobRangedDelay      = 360;
 constexpr uint16 kDefaultMobDamageMultiplier = 100;
 
 using ZoneSettingsDataset = xi::data::datasets::zones::settings::Dataset;
@@ -271,6 +272,11 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
             mainWeapon->setSkillType(attributes.CombatSkill.value_or(xi::SkillType::None));
             mainWeapon->setDelay(attributes.Delay.value_or(kDefaultMobDelay));
             mainWeapon->setBaseDelay(attributes.Delay.value_or(kDefaultMobDelay));
+
+            auto* rangedWeapon = static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_RANGED]);
+            rangedWeapon->setSkillType(attributes.CombatSkill.value_or(xi::SkillType::None));
+            rangedWeapon->setDelay(attributes.RangedDelay.value_or(kDefaultMobRangedDelay));
+            rangedWeapon->setBaseDelay(attributes.RangedDelay.value_or(kDefaultMobRangedDelay));
 
             PMob->m_dmgMult = attributes.DamageMultiplier.value_or(kDefaultMobDamageMultiplier);
 

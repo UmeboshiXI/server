@@ -56,7 +56,7 @@ xi.mix.trollAutomaton.setupAutomaton = function(mob, automatonType)
     mob:setLocalVar('automatonTypeModelId', automatonType.modelId)
     mob:setModelId(automatonType.modelId)
     mob:changeJob(automatonType.job)
-    mob:setDelay(270) -- All Frames (Waiting for delay conversion PR to be merged)
+    mob:setDelay(270, xi.slot.MAIN) -- All Frames (Waiting for delay conversion PR to be merged)
     mob:setMod(xi.mod.DOUBLE_ATTACK, automatonType.doubleAttack or 0) -- Valoredge Frame
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 27) -- Harlequin and Stormwalker
     mob:setMobMod(xi.mobMod.MAGIC_DELAY, math.randomInt(3, 7)) -- Harlequin and Stormwalker

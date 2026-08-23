@@ -46,7 +46,7 @@ entity.onMobSpawn = function(mob)
         if instance:getStage() == 1 then
             --mob:setEntitySize(xi.entitySize.LARGE)
             mob:setMobMod(xi.mobMod.MAGIC_COOL, 40)
-            mob:setDelay(200)
+            mob:setDelay(200, xi.slot.MAIN)
         end
     end
 end

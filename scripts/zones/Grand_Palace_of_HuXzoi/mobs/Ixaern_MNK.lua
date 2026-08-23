@@ -14,14 +14,15 @@ local bracerMode = function(mob, qnAern1, qnAern2)
     -- captures show delay reduction from 280 -> 120
     -- note this is actual delay reduction with change in tp gained and imparted
     -- note lvl 83 mnk with martial arts vii
-    mob:setMod(xi.mod.DELAY, -2600)
+    -- mob:setMod(xi.mod.DELAY, -160)
+    mob:setDelay(160, xi.slot.MAIN)
 
     if qnAern1 and qnAern1:isAlive() then
         qnAern1:setAnimationSub(2)
         qnAern1:addMod(xi.mod.ATT, 200)
         -- captures show delay reduction from 240 -> 120
         -- note this is actual delay reduction with change in tp gained and imparted
-        qnAern1:setMod(xi.mod.DELAY, -2000)
+        -- qnAern1:setMod(xi.mod.DELAY, -120)
     end
 
     if qnAern2 and qnAern2:isAlive() then
@@ -29,7 +30,7 @@ local bracerMode = function(mob, qnAern1, qnAern2)
         qnAern2:addMod(xi.mod.ATT, 200)
         -- captures show delay reduction from 240 -> 120
         -- note this is actual delay reduction with change in tp gained and imparted
-        qnAern2:setMod(xi.mod.DELAY, -2000)
+        qnAern2:setMod(xi.mod.DELAY, -120)
     end
 
     -- slightly delay adding local var to avoid adding bracers to Ix'Mnk

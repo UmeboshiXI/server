@@ -16,7 +16,7 @@ local equipCells =
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setDelay(300)
+    mob:setDelay(300, xi.slot.MAIN)
     -- dracos aggro sound, not sight
     mob:setMobMod(xi.mobMod.DETECTION, xi.detects.HEARING)
     mob:setMod(xi.mod.ATT, 100)

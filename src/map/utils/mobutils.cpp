@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1141,8 +1141,6 @@ void SetupRangedAttack(CMobEntity* PMob)
     PMob->defaultMobMod(xi::MobMod::SpecialSkill, 0); // Need to remove the base ranged attack
     PMob->defaultMobMod(xi::MobMod::RangedAttackRange, 14);
     PMob->PAI->GetController()->SetRangedAttackEnabled(true);
-
-    static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_RANGED])->setBaseDelay(300);
 }
 
 void SetupJob(CMobEntity* PMob)

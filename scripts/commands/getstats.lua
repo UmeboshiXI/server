@@ -79,6 +79,8 @@ commandObj.onTrigger = function(player, option)
             player:printToPlayer(string.format('Ranged Weap Dmg: %i ', target:getRangedDmg()), xi.msg.channel.SYSTEM_3)
             player:printToPlayer(string.format('Magic Attack bonus: %i ', target:getMod(xi.mod.MATT)), xi.msg.channel.SYSTEM_3)
             player:printToPlayer(string.format('Magic Accuracy bonus: %i ', target:getMod(xi.mod.MACC)), xi.msg.channel.SYSTEM_3)
+            player:printToPlayer(string.format('Main Weapon Delay: %i ', target:getBaseDelay()), xi.msg.channel.SYSTEM_3)
+            player:printToPlayer(string.format('Ranged Weapon Delay: %i ', target:getBaseRangedDelay()), xi.msg.channel.SYSTEM_3)
 
             return
         end,

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1858,7 +1858,7 @@ auto GetBaseRangedDelay(CBattleEntity* PEntity) -> uint16
     }
     else if (PMobEntity)
     {
-        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_RANGED]);
         if (PWeapon)
         {
             baseDelay = PWeapon->getBaseDelay();
@@ -1886,7 +1886,7 @@ auto CalculateTPFromDamageDealt(CBattleEntity* PAttacker, const bool& isZanshin,
     }
 }
 
-auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, uint16 delay) -> int32
+auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 damage, uint16 delay, bool isRanged) -> int32
 {
     if (PAttacker == nullptr || PDefender == nullptr)
     {
@@ -1894,7 +1894,7 @@ auto CalculateTPFromDamageTaken(CBattleEntity* PAttacker, CBattleEntity* PDefend
         return 0;
     }
 
-    int32 tpReturn = luautils::callGlobal<int32>("xi.combat.tp.calculateTPGainOnPhysicalDamage", PAttacker, PDefender, damage, delay);
+    int32 tpReturn = luautils::callGlobal<int32>("xi.combat.tp.calculateTPGainOnPhysicalDamage", PAttacker, PDefender, damage, delay, isRanged);
 
     return tpReturn;
 }
@@ -2276,7 +2276,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
         {
             int32 delay = 0;
 
-            if (isRanged && PAttacker->objtype == TYPE_PC)
+            if (isRanged)
             {
                 delay = GetBaseRangedDelay(PAttacker);
             }
@@ -2285,7 +2285,7 @@ auto TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYS
                 delay = GetBaseDelay(PAttacker);
             }
 
-            int16 defenderTPReturn = CalculateTPFromDamageTaken(PAttacker, PDefender, damage, delay);
+            int16 defenderTPReturn = CalculateTPFromDamageTaken(PAttacker, PDefender, damage, delay, isRanged);
 
             PDefender->addTP((int16)(tpMultiplier * defenderTPReturn));
         }
@@ -2413,7 +2413,7 @@ auto TakeWeaponskillDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, i
             delay = GetBaseDelay(PAttacker);
         }
 
-        baseTp = CalculateTPFromDamageTaken(PAttacker, PDefender, damage, delay);
+        baseTp = CalculateTPFromDamageTaken(PAttacker, PDefender, damage, delay, isRanged);
 
         PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier * baseTp));
     }

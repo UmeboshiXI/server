@@ -9,7 +9,7 @@ require('scripts/zones/Bhaflau_Remnants/globals/zoneUtil')
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setDelay(300)
+    mob:setDelay(300, xi.slot.MAIN)
     mob:setMod(xi.mod.ATT, 101)
     mob:setMod(xi.mod.MAIN_DMG_RATING, -55)
     mob:addListener('ITEM_DROPS', 'ERUCA_ITEM_DROPS', function(mobArg, loot)

@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATTP, 30)
     mob:setMod(xi.mod.DEF, 270)
     mob:setMod(xi.mod.MDEF, 10)
-    mob:setDelay(220)
+    mob:setDelay(220, xi.slot.MAIN)
     mob:setLocalVar('phase', 1) -- Set to 1 for readability
 end
 
@@ -47,11 +47,11 @@ entity.onMobFight = function(mob, target)
 
     -- Delay increases as HP gets lower.
     if phase == 3 then
-        mob:setDelay(110)
+        mob:setDelay(110, xi.slot.MAIN)
     elseif phase == 2 then
-        mob:setDelay(160)
+        mob:setDelay(160, xi.slot.MAIN)
     else
-        mob:setDelay(220)
+        mob:setDelay(220, xi.slot.MAIN)
     end
 end
 

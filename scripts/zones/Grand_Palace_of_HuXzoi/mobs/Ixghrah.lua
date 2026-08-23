@@ -27,7 +27,7 @@ local formConfig =
 local function setupForm(mob, chosenForm)
     mob:setAnimationSub(chosenForm)
     mob:setMagicCastingEnabled(formConfig[chosenForm][3])
-    mob:setDelay(formConfig[chosenForm][4])
+    mob:setDelay(formConfig[chosenForm][4], xi.slot.MAIN)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, formConfig[chosenForm][5])
     mob:setMod(xi.mod.TRIPLE_ATTACK, formConfig[chosenForm][6])
     mob:setMod(xi.mod.ATT, mob:getLocalVar('originalATT') + formConfig[chosenForm][7])
