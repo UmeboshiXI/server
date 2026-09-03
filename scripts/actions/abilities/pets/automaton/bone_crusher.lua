@@ -22,6 +22,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.numHits        = utils.clamp(3 + xi.automaton.getExtraHits(automaton, 3), 1, 8)
     params.fTP            = { 1.5, 1.5, 1.5 }
     params.vit_wSC        = 0.60
+    params.calculateAlpha = true
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
     params.shadowBehavior = params.numHits

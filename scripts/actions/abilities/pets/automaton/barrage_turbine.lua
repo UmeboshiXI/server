@@ -44,6 +44,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.fTP             = { 1.0, 1.0, 1.0 }
     params.str_wSC         = 0.50
     params.dex_wSC         = 0.25
+    params.calculateAlpha  = true
     params.attackType      = xi.attackType.RANGED
     params.damageType      = xi.damageType.PIERCING
     params.shadowBehavior  = params.numHits

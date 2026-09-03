@@ -22,6 +22,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.numHits          = utils.clamp(2 + xi.automaton.getExtraHits(automaton, 2), 1, 8)
     params.fTP              = { 1.5, 1.5, 1.5 }
     params.vit_wSC          = 0.50
+    params.calculateAlpha   = true
     params.attackMultiplier = { 1.36, 1.36, 1.36 }
     params.canCrit          = true
     params.criticalChance   = { 0.2, 0.4, 0.7 }

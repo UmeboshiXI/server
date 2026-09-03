@@ -22,6 +22,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.numHits          = 1
     params.fTP              = { 2.5, 3.0, 4.0 }
     params.dex_wSC          = 0.60
+    params.calculateAlpha   = true
     params.accuracyModifier = { 100, 100, 100 }
     params.attackType       = xi.attackType.RANGED
     params.damageType       = xi.damageType.PIERCING

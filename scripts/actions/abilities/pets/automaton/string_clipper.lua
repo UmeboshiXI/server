@@ -23,6 +23,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.fTP              = { 2.0, 2.0, 2.0 }
     params.str_wSC          = 0.30
     params.dex_wSC          = 0.30
+    params.calculateAlpha   = true
     params.attackMultiplier = { 1.5, 1.5, 1.5 }
     params.accuracyModifier = { 0, 50, 100 }
     params.attackType       = xi.attackType.PHYSICAL

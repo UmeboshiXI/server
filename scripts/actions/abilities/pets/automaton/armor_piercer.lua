@@ -22,6 +22,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     params.numHits          = 1
     params.fTP              = { 3.0, 3.5, 4.0 }
     params.dex_wSC          = 0.60
+    params.calculateAlpha   = true
     params.ignoreDefense    = { 0.5, 0.5, 0.5 }
     params.accuracyModifier = { 100, 100, 100 }
     params.attackType       = xi.attackType.RANGED
