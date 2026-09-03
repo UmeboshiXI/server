@@ -16,6 +16,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.arcuballista.onAutomatonAbili
     params.numHits          = 1
     params.fTP              = { 2.5, 3.0, 4.0 }
     params.dex_wSC          = 0.30
+    params.calculateAlpha   = true
     params.accuracyModifier = { 100, 100, 100 }
     params.attackType       = xi.attackType.RANGED
     params.damageType       = xi.damageType.PIERCING
@@ -46,6 +47,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.armor_piercer.onAutomatonAbil
     params.numHits          = 1
     params.fTP              = { 3.0, 3.5, 4.0 }
     params.dex_wSC          = 0.30
+    params.calculateAlpha   = true
     params.ignoreDefense    = { 0.5, 0.5, 0.5 }
     params.accuracyModifier = { 100, 100, 100 }
     params.attackType       = xi.attackType.RANGED
@@ -77,6 +79,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.bone_crusher.onAutomatonAbili
     params.numHits        = utils.clamp(3 + xi.automaton.getExtraHits(automaton, 3), 1, 8)
     params.fTP            = { 1.5, 1.5, 1.5 }
     params.vit_wSC        = 0.30
+    params.calculateAlpha = true
     params.attackType     = xi.attackType.PHYSICAL
     params.damageType     = xi.damageType.BLUNT
     params.shadowBehavior = params.numHits
@@ -144,6 +147,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.chimera_ripper.onAutomatonAbi
     params.numHits          = utils.clamp(1 + xi.automaton.getExtraHits(automaton, 1), 1, 8)
     params.fTP              = { 2.0, 2.5, 3.0 }
     params.str_wSC          = 0.30
+    params.calculateAlpha   = true
     params.accuracyModifier = { 100, 100, 100 }
     params.attackType       = xi.attackType.PHYSICAL
     params.damageType       = xi.damageType.SLASHING
@@ -171,6 +175,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.daze.onAutomatonAbility', fun
     params.numHits          = 1
     params.fTP              = { 5.0, 5.5, 6.0 }
     params.dex_wSC          = 0.30
+    params.calculateAlpha   = true
     params.accuracyModifier = { 150, 150, 150 }
     params.attackType       = xi.attackType.RANGED
     params.damageType       = xi.damageType.PIERCING
@@ -202,6 +207,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.knockout.onAutomatonAbility',
     params.numHits          = utils.clamp(1 + xi.automaton.getExtraHits(automaton, 1), 1, 8)
     params.fTP              = { 4.0, 4.5, 5.0 }
     params.agi_wSC          = 0.40
+    params.calculateAlpha   = true
     params.accuracyModifier = { 50, 50, 50 }
     params.attackType       = xi.attackType.PHYSICAL
     params.damageType       = xi.damageType.BLUNT
@@ -261,6 +267,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.slapstick.onAutomatonAbility'
     params.fTP              = { 1.0, 1.0, 1.0 }
     params.str_wSC          = 0.20
     params.dex_wSC          = 0.20
+    params.calculateAlpha   = true
     params.accuracyModifier = { 0, 30, 50 }
     params.attackType       = xi.attackType.PHYSICAL
     params.damageType       = xi.damageType.BLUNT
@@ -289,6 +296,7 @@ m:addOverride('xi.actions.abilities.pets.automaton.string_clipper.onAutomatonAbi
     params.fTP              = { 2.0, 2.0, 2.0 }
     params.str_wSC          = 0.15
     params.dex_wSC          = 0.15
+    params.calculateAlpha   = true
     params.attackMultiplier = { 1.5, 1.5, 1.5 }
     params.accuracyModifier = { 0, 50, 100 }
     params.attackType       = xi.attackType.PHYSICAL
@@ -298,6 +306,97 @@ m:addOverride('xi.actions.abilities.pets.automaton.string_clipper.onAutomatonAbi
     xi.automaton.applyFlameHolder(automaton, params.fTP)
 
     local info = xi.mobskills.mobPhysicalMove(automaton, target, skill, action, params)
+
+    if xi.mobskills.processDamage(automaton, target, skill, action, info) then
+        target:takeDamage(info.damage, automaton, info.attackType, info.damageType)
+    end
+
+    return info.damage
+end)
+
+-----------------------------------
+-- Ranged Attack
+-----------------------------------
+m:addOverride('xi.actions.abilities.pets.automaton.ranged_attack.onAutomatonAbility', function(target, automaton, skill, master, action)
+    local params = {}
+
+    params.baseDamage       = xi.automaton.getRangedBaseDamage(automaton)
+    params.numHits          = 1
+    params.fTP              = { 1.0, 1.0, 1.0 }
+    params.str_wSC          = 0.25
+    params.dex_wSC          = 0.25
+    params.attackType       = xi.attackType.RANGED
+    params.damageType       = xi.damageType.PIERCING
+    params.shadowBehavior   = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    params.skipParry        = true
+    params.skipGuard        = true
+    params.skipBlock        = true
+
+    -- Check for Repeater.
+    local doubleShotRate = automaton:getMod(xi.mod.DOUBLE_SHOT_RATE)
+    if
+        doubleShotRate > 0 and
+        math.randomInt(1, 100) <= doubleShotRate
+    then
+        -- For players these shots are seperate, like double attack, but for automatons, they are added together.
+        params.numHits = 2
+        params.shadowBehavior = xi.mobskills.shadowBehavior.NUMSHADOWS_2
+    end
+
+    local info = xi.mobskills.mobRangedMove(automaton, target, skill, action, params)
+
+    if xi.mobskills.processDamage(automaton, target, skill, action, info) then
+        target:takeDamage(info.damage, automaton, info.attackType, info.damageType)
+    end
+
+    return info.damage
+end)
+
+-----------------------------------
+-- Barrage Turbine
+-----------------------------------
+m:addOverride('xi.actions.abilities.pets.automaton.barrage_turbine.onAutomatonAbility', function(target, automaton, skill, master, action)
+    -- Barrage projectiles per Wind Maneuver
+    local shotCount =
+    {
+        [1] = 4,
+        [2] = 6,
+        [3] = 9,
+    }
+
+    local burdenApplied =
+    {
+        [1] = 7,
+        [2] = 14,
+        [3] = 21,
+    }
+
+    automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
+
+    local windManeuvers = master:countEffect(xi.effect.WIND_MANEUVER)
+    local burdenAmount  = burdenApplied[windManeuvers]
+
+    if burdenAmount then
+        master:addBurden(xi.element.WIND - 1, burdenAmount)
+    end
+
+    local params = {}
+
+    params.baseDamage      = xi.automaton.getRangedBaseDamage(automaton)
+    params.numHits         = shotCount[windManeuvers] or 1
+    params.fTP             = { 1.0, 1.0, 1.0 }
+    params.str_wSC         = 0.25
+    params.dex_wSC         = 0.25
+    params.calculateAlpha  = true
+    params.attackType      = xi.attackType.RANGED
+    params.damageType      = xi.damageType.PIERCING
+    params.shadowBehavior  = params.numHits
+    params.skipParry       = true
+    params.skipGuard       = true
+    params.skipBlock       = true
+    params.terminateOnMiss = true
+
+    local info = xi.mobskills.mobRangedMove(automaton, target, skill, action, params)
 
     if xi.mobskills.processDamage(automaton, target, skill, action, info) then
         target:takeDamage(info.damage, automaton, info.attackType, info.damageType)

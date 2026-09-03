@@ -23,6 +23,7 @@ m:addOverride('xi.actions.abilities.pets.axe_kick.onPetAbility', function(target
     params.fTP               = { 2.00, 2.00, 2.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -51,6 +52,7 @@ m:addOverride('xi.actions.abilities.pets.barracuda_dive.onPetAbility', function(
     params.fTP               = { 2.00, 2.00, 2.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -80,6 +82,7 @@ m:addOverride('xi.actions.abilities.pets.blindside.onPetAbility', function(targe
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     -- params.str_wSC           = 0.20 -- TODO: Capture wSCs
     -- params.mnd_wSC           = 0.20
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -108,6 +111,7 @@ m:addOverride('xi.actions.abilities.pets.burning_strike.onPetAbility', function(
     params.fTPSubsequentHits  = { 2.75, 2.75, 2.75 }
     params.str_wSC            = 0.20
     params.int_wSC            = 0.20
+    params.calculateAlpha     = true
     params.attackType         = xi.attackType.PHYSICAL
     params.damageType         = xi.damageType.BLUNT
     params.hybridSkill        = true
@@ -150,6 +154,7 @@ m:addOverride('xi.actions.abilities.pets.camisado.onPetAbility', function(target
     params.fTPSubsequentHits = { 2.0, 2.0, 2.0 }
     params.str_wSC           = 0.20
     params.mnd_wSC           = 0.20
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -186,6 +191,7 @@ m:addOverride('xi.actions.abilities.pets.chaotic_strike.onPetAbility', function(
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.20
     params.int_wSC           = 0.20
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
@@ -220,6 +226,7 @@ m:addOverride('xi.actions.abilities.pets.claw.onPetAbility', function(target, pe
     params.fTP               = { 2.00, 2.00, 2.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.PIERCING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -253,6 +260,7 @@ m:addOverride('xi.actions.abilities.pets.crescent_fang.onPetAbility', function(t
     params.fTP               = { 1.50, 1.50, 1.50 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.PIERCING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -288,6 +296,7 @@ m:addOverride('xi.actions.abilities.pets.double_punch.onPetAbility', function(ta
     params.fTP               = { 5.00, 5.00, 5.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_2
@@ -315,6 +324,7 @@ m:addOverride('xi.actions.abilities.pets.double_slap.onPetAbility', function(tar
     params.fTP               = { 6.328125, 6.328125, 6.328125 }
     params.fTPSubsequentHits = { 1.000000, 1.000000, 1.000000 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_2
@@ -342,6 +352,7 @@ m:addOverride('xi.actions.abilities.pets.eclipse_bite.onPetAbility', function(ta
     params.fTP               = { 3.269531, 3.269531, 3.269531 }
     params.fTPSubsequentHits = { 1.000000, 1.000000, 1.000000 }
     params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
@@ -370,6 +381,7 @@ m:addOverride('xi.actions.abilities.pets.flaming_crush.onPetAbility', function(t
     params.fTPSubsequentHits  = { 1.00, 1.00, 1.00 }
     params.str_wSC            = 0.20
     params.int_wSC            = 0.20
+    params.calculateAlpha     = true
     params.attackType         = xi.attackType.PHYSICAL
     params.damageType         = xi.damageType.BLUNT
     params.hybridSkill        = true
@@ -412,6 +424,7 @@ m:addOverride('xi.actions.abilities.pets.megalith_throw.onPetAbility', function(
     params.fTPSubsequentHits = { 1.000, 1.000, 1.000 }
     params.str_wSC           = 0.20
     params.agi_wSC           = 0.20
+    params.calculateAlpha    = true
     params.skipParry         = true
     params.skipGuard         = true
     params.skipBlock         = true
@@ -449,6 +462,7 @@ m:addOverride('xi.actions.abilities.pets.moonlit_charge.onPetAbility', function(
     params.fTP               = { 1.00, 1.00, 1.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.vit_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -484,6 +498,7 @@ m:addOverride('xi.actions.abilities.pets.mountain_buster.onPetAbility', function
     params.fTP               = { 7.25, 7.25, 7.25 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.vit_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -512,6 +527,7 @@ m:addOverride('xi.actions.abilities.pets.poison_nails.onPetAbility', function(ta
     params.fTP               = { 2.00, 2.00, 2.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.PIERCING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -547,6 +563,7 @@ m:addOverride('xi.actions.abilities.pets.predator_claws.onPetAbility', function(
     params.fTP               = { 10.00, 10.00, 10.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
@@ -574,6 +591,7 @@ m:addOverride('xi.actions.abilities.pets.punch.onPetAbility', function(target, p
     params.fTP               = { 2.00, 2.00, 2.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -611,6 +629,7 @@ m:addOverride('xi.actions.abilities.pets.regal_scratch.onPetAbility', function(t
     params.fTP               = { 3.00, 3.00, 3.00 } -- TODO: Capture fTPs
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     -- params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3
@@ -638,6 +657,7 @@ m:addOverride('xi.actions.abilities.pets.rock_buster.onPetAbility', function(tar
     params.fTP               = { 2.25, 2.25, 2.25 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.vit_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -674,6 +694,7 @@ m:addOverride('xi.actions.abilities.pets.rock_throw.onPetAbility', function(targ
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.20
     params.agi_wSC           = 0.20
+    params.calculateAlpha    = true
     params.skipParry         = true
     params.skipGuard         = true
     params.skipBlock         = true
@@ -711,6 +732,7 @@ m:addOverride('xi.actions.abilities.pets.rush.onPetAbility', function(target, pe
     params.fTP               = { 3.50, 3.50, 3.50 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_5
@@ -739,6 +761,7 @@ m:addOverride('xi.actions.abilities.pets.shock_strike.onPetAbility', function(ta
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.20
     params.int_wSC           = 0.20
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -774,6 +797,7 @@ m:addOverride('xi.actions.abilities.pets.spinning_dive.onPetAbility', function(t
     params.fTP               = { 7.01171, 7.01171, 7.01171 }
     params.fTPSubsequentHits = { 1.00000, 1.00000, 1.00000 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
@@ -802,6 +826,7 @@ m:addOverride('xi.actions.abilities.pets.tail_whip.onPetAbility', function(targe
     params.fTP               = { 3.00, 3.00, 3.00 }
     params.fTPSubsequentHits = { 1.00, 1.00, 1.00 }
     params.str_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.BLUNT
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1
