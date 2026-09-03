@@ -21,6 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.fTP               = { 5.0, 5.0, 5.0 } -- TODO: Capture fTPs
     params.fTPSubsequentHits = { 5.0, 5.0, 5.0 }
     -- TODO: Capture wSCs
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.PIERCING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3

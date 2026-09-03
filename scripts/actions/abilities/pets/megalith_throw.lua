@@ -21,6 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.fTPSubsequentHits = { 2.375, 2.375, 2.375 }
     params.str_wSC           = 0.20
     params.agi_wSC           = 0.20
+    params.calculateAlpha    = true
     params.skipParry         = true
     params.skipGuard         = true
     params.skipBlock         = true

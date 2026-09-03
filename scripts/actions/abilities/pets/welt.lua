@@ -21,6 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.fTP               = { 3.0, 3.0, 3.0 }
     params.fTPSubsequentHits = { 3.0, 3.0, 3.0 }
     params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_1

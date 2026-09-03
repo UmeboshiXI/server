@@ -21,13 +21,13 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if target:isNM() then
         local params = {}
 
-        params.baseDamage      = power
-        params.element         = xi.element.DARK
-        params.attackType      = xi.attackType.MAGICAL
-        params.damageType      = xi.damageType.DARK
-        params.shadowBehavior  = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
-        params.canMagicBurst   = true
-        params.primaryMessage  = xi.msg.basic.USES_JA_TAKE_DAMAGE
+        params.baseDamage     = power
+        params.element        = xi.element.DARK
+        params.attackType     = xi.attackType.MAGICAL
+        params.damageType     = xi.damageType.DARK
+        params.shadowBehavior = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+        params.canMagicBurst  = true
+        params.primaryMessage = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
         local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
 

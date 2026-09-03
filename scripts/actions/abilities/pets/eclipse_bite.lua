@@ -20,6 +20,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.fTP               = { 3.269531, 4.085937, 4.902343 } -- TODO: Capture 2000 TP fTP. Using linear scaling for now.
     params.fTPSubsequentHits = { 3.269531, 4.085937, 4.902343 }
     params.dex_wSC           = 0.30
+    params.calculateAlpha    = true
     params.attackType        = xi.attackType.PHYSICAL
     params.damageType        = xi.damageType.SLASHING
     params.shadowBehavior    = xi.mobskills.shadowBehavior.NUMSHADOWS_3

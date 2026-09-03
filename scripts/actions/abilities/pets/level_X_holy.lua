@@ -41,6 +41,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     params.dStatAttackerMod = xi.mod.MND
     params.dStatDefenderMod = xi.mod.MND
     params.canMagicBurst    = true
+    params.calculateAlpha   = true
     params.primaryMessage   = xi.msg.basic.USES_JA_TAKE_DAMAGE
 
     local info = xi.mobskills.mobMagicalMove(pet, target, petskill, action, params)
