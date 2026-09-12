@@ -1609,7 +1609,66 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration, subT
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobHealMove = function(target, healAmount)
+-- LLS definitions for normalizeHealSkillParams()
+--- @class healSkillParams
+--- @field baseHeal       number|nil
+--- @field additiveHeal   number
+--- @field fTP            number[]
+--- @field fTPBonus       number
+--- @field primaryMessage xi.msg.basic
+
+--- Table of default skill params shared by physical/ranged mobskills.
+--- Sets default values if the params are not explicitly defined in the mobskill script.
+--- @param skillParams healSkillParams
+--- @return healSkillParams
+local function normalizeHealSkillParams(skillParams)
+    local defaults =
+    {
+        baseHeal       = 0,
+        additiveHeal   = 0,
+        fTP            =
+        {
+            { tp = 1000, modifier = 1.0 },
+            { tp = 2000, modifier = 1.0 },
+            { tp = 3000, modifier = 1.0 },
+        },
+        fTPBonus       = 0,
+        primaryMessage = nil,
+    }
+
+    local result = {}
+
+    for paramName, defaultValue in pairs(defaults) do
+        result[paramName] = utils.defaultIfNil(skillParams[paramName], defaultValue)
+    end
+
+    result.primaryMessage = skillParams.primaryMessage
+
+    return result
+end
+
+xi.mobskills.mobHealMove = function(mob, target, skill, action, skillParams)
+    -- Sanitizes skillParams and sets defaults for any params not explicitly set in mob skill scripts.
+    local params = normalizeHealSkillParams(skillParams)
+
+    local baseHeal = params.baseHeal or 0
+
+    if params.primaryMessage then
+        skill:setMsg(params.primaryMessage)
+    end
+
+    local healAmount = 0
+    local wscMods    = xi.combat.physical.calculateWSC(mob, skillParams.str_wSC, skillParams.dex_wSC, skillParams.vit_wSC, skillParams.agi_wSC, skillParams.int_wSC, skillParams.mnd_wSC, skillParams.chr_wSC)
+    local tpValue    = skill:getTP() + mob:getMod(xi.mod.TP_BONUS) + params.fTPBonus
+    local basefTP    = xi.combat.physical.calculateTPScaling(tpValue, params.fTP)
+    -- TODO: Check/capture if weather/day has any influence on healing power (Avatars, etc.)
+
+    -- TODO: Handle Curse II effect (Sometimes refered to as "Zombie")
+    -- https://www.bg-wiki.com/ffxi/Curse_(Recovery)
+
+    healAmount = math.floor((baseHeal + wscMods) * basefTP) + params.additiveHeal
+
+    -- TODO: Handle Cure Potency/Cure Potency Received modifiers (See: Leviathan's Soothing Current)
     healAmount = math.min(healAmount, target:getMaxHP() - target:getHP())
 
     target:wakeUp()
