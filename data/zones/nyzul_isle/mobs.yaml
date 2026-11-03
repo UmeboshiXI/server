@@ -630,6 +630,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Behemoth:
     id:            387
@@ -3369,6 +3371,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Long-Horned_Chariot:
     id:            2435
@@ -3408,6 +3412,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Lord_of_Onzozo:
     id:            2439
@@ -4807,6 +4813,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Rambukk:
     id:            5734
@@ -5253,6 +5261,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Shii:
     id:            3597

@@ -65,6 +65,8 @@ templates:
         type: [scripted]
       stats:
         hp: 15250
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: ultra_rare
@@ -678,6 +680,8 @@ templates:
         links:      true
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Long-Bowed_Chariot_2:
     id:            2433
@@ -720,6 +724,8 @@ templates:
         type: [scripted]
       stats:
         hp: 45600
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common

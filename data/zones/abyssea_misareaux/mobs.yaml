@@ -630,6 +630,8 @@ templates:
         hitbox:         25
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Ephemeral_Amoeban:
     id:            1243
@@ -983,6 +985,8 @@ templates:
         hitbox:          13
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
     loot:
       drops:
         - chance: common
@@ -1412,6 +1416,8 @@ templates:
         hitbox:         25
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Orapodium:
     id:            2992
@@ -1600,6 +1606,8 @@ templates:
         hitbox:         25
       spawn:
         type: [scripted]
+      mob_mods:
+        base_damage_multiplier: 150
 
   Scrutinizer:
     id:      3508
